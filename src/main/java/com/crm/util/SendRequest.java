@@ -219,8 +219,8 @@ public class SendRequest {
 		System.out.println(json);
 
 		  try {
-			System.out.println("PUTTING AT"+ appuri+"/update-customer");
-			URL url = new URL(appuri+"/update-customer");
+			System.out.println("DELETE AT"+ appuri+"/delete-customer");
+			URL url = new URL(appuri+"/delete-customer");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("DELETE");

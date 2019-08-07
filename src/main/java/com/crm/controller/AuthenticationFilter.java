@@ -42,14 +42,22 @@ public class AuthenticationFilter implements Filter {
         }
 
         HttpSession session = req.getSession(false);
-      
+        if(session==null)
+        {
+
+            this.context.log("Unauthorized access request");
+            res.sendRedirect("login.jsp");
+        
+        }
+        else {
         String	token= (String) session.getAttribute("token");
-        if (session==null || token==null ||!(SendRequest.checkTokenAuthentication(token))) {
+        if (token==null ||!(SendRequest.checkTokenAuthentication(token))) {
             this.context.log("Unauthorized access request");
             res.sendRedirect("login.jsp");
         } else{
             // pass the request along the filter chain
             chain.doFilter(request, response);
+        }
         }
         
     }

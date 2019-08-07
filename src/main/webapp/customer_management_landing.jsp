@@ -130,7 +130,7 @@
       </ol>
     </section>
     <section>
-  <form action="CustomerManagement" method="post">  
+  <form id="crmForm" action="CustomerManagement" method="post" >  
     <div class="col-md-12">
           <!-- Application buttons -->
           <div class="box">
@@ -138,10 +138,7 @@
                <a class="btn btn-app" onclick= "addCustomer()">
                 <i class="fa fa-plus"></i> Add
               </a>
-              
-              <a class="btn btn-app">
-                <i class="fa fa-edit"></i> Edit
-              </a>
+
                
               <a class="btn btn-app">
                <i class="fa fa-trash" onclick= "deleteCustomer()"></i> Delete
@@ -165,6 +162,8 @@
                   <th>GENDER</th>
                   <th>D.O.B</th>
                   <th>RESIDENT</th>
+                  <th>BIRTH PLACE</th>
+                  <th>MOBILE NUMBER</th>
                   <th>SEGMENT</th>
                 </tr>
                 </thead>
@@ -175,26 +174,18 @@
                 <tr>
                   <td><input type="checkbox" name="customerId" id= "<%=custDetailList.get(i).getCustomerNumber()%>" value="<%=custDetailList.get(i).getCustomerNumber()%>"></td>
                   <td><a onclick= "getCustomerWithId('<%=custDetailList.get(i).getCustomerNumber()%>')"><%=custDetailList.get(i).getCustomerNumber() %></a></td>
-                  <td><%=custDetailList.get(i).getFirstName() %> &nbsp;&nbsp; <%=custDetailList.get(i).getLastName()%></td>
+                  <td><%=custDetailList.get(i).getFirstName() %> &nbsp; <%=custDetailList.get(i).getLastName()%></td>
                   <td> <%=custDetailList.get(i).getGender() %></td>
                   <td><%=custDetailList.get(i).getDateOfBirth() %></td>
                   <td> <%=custDetailList.get(i).getCountryOfResidence() %></td>
+                  <td><%=custDetailList.get(i).getCountryOfBirth() %></td>
+                  <td><%=custDetailList.get(i).getMobileNumber() %></td>
                   <td><%=custDetailList.get(i).getCustomerSegmant() %></td>
                 </tr>
                   <%} 
                }%>
                 </tbody>
-                <tfoot>
-                <tr>
-                  <th>SELECT</th>
-                  <th>CUSTOMER NUMBER</th>
-                  <th>NAME</th>
-                  <th>GENDER</th>
-                  <th>D.O.B</th>
-                  <th>RESIDENT</th>
-                  <th>SEGMENT</th>
-                </tr>
-                </tfoot>
+
               </table>
             </div>
             <!-- /.box-body -->
@@ -271,7 +262,9 @@ function getCustomerWithId(id)
 	
 function deleteCustomer()
 {
-	document.getElementById("action").innerHTML = "delete";
+
+	document.getElementById("action").value = "delete";
+	document.forms["crmForm"].submit();
 }
 </script>
 
