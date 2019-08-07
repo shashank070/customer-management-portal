@@ -18,6 +18,9 @@ phases:
     commands:
       - echo Build started on `date`
       - mvn package
+      - cd target
+      - sudo aws s3 cp customer-management-portal.war s3://crm-web-code/ 
+      - echo loaded new war
   post_build:
     commands:
       - echo Build completed on `date`
