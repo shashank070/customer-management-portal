@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.crm.util.SendRequest;
 import com.crm.vo.Address;
 import com.crm.vo.CustomerDetail;
@@ -24,6 +26,9 @@ import com.crm.vo.CustomerDetail;
 @WebServlet("/CustomerManagement")
 public class CustomerManagement extends HttpServlet{
 	 private static final long serialVersionUID = 1L;
+	 
+	 private static final Logger logger = Logger.getLogger(CustomerManagement.class);
+	 
 	 @Override
 		public void init() {
 		 
@@ -38,8 +43,11 @@ public class CustomerManagement extends HttpServlet{
 		    String action= req.getParameter("action");
 		    
 		    String customerId= req.getParameter("customerid");
+		    
+		  
 		    if(null!=customerId && null!=action && session.getAttribute("token")!=null)
 		    {
+		    	logger.info("GET REQUEST: "+action);
 		    	CustomerDetail custDetail=SendRequest.sendGetRequestWithId(customerId,(String)session.getAttribute("token"));
 		    	req.setAttribute("custDetail", custDetail);
 		    	RequestDispatcher rd=req.getRequestDispatcher("getcustomer.jsp");  
@@ -70,6 +78,7 @@ public class CustomerManagement extends HttpServlet{
 		   
 		   if(null!=action && (action.equals("post")||action.equals("put")))
 		   {
+			   logger.info("ACTION CALLED: "+action);
 
 			 String firstName=req.getParameter("firstName");
 			
@@ -148,6 +157,9 @@ public class CustomerManagement extends HttpServlet{
 		   }
 		   if(null!=action && action.equals("delete"))
 		   {
+			   
+			   logger.info("ACTION CALLED: "+action);
+			   
 			   String[] custometIdArr=req.getParameterValues("customerId");
 			   SendRequest.sendDeleteRequest(token,custometIdArr); 
 		   }

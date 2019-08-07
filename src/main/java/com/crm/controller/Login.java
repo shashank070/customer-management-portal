@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.crm.util.SendRequest;
 import com.crm.vo.Address;
 import com.crm.vo.CustomerDetail;
@@ -25,6 +27,8 @@ public class Login extends HttpServlet{
 	
 	 public static Properties  properties;
 	 private static final long serialVersionUID = 1L;
+	 
+	 private static final Logger logger = Logger.getLogger(Login.class);
 	 @Override
 		public void init() {
 		  properties = new Properties();
@@ -52,10 +56,14 @@ public class Login extends HttpServlet{
 		   session.setAttribute("token", token);
 		   if(null!=token && SendRequest.checkTokenAuthentication(token))
 		   {
+			   logger.info("**** SUCCESFULL LOGIN ****");
+			   logger.info("Token: "+token);
 			   CustomerManagement customerManagement = new CustomerManagement();
 			   customerManagement.doGet(request, response);
 		   }else
 		   {
+			   logger.info("**** INVALID TOKEN ****");
+			   
 			    RequestDispatcher rd=request.getRequestDispatcher("login.jsp");  
 		        rd.include(request, response);  
 		   }
