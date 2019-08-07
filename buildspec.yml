@@ -17,7 +17,6 @@ phases:
   build: 
     commands:
       - echo Build started on `date`
-      - mvn versions:set versions:update-child-modules -DnewVersion=$IMAGE_VERSION
       - mvn package
   post_build:
     commands:
