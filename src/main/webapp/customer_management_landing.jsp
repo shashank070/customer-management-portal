@@ -108,7 +108,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="customer_management_landing.jsp"><i class="fa fa-circle-o"></i> Customer Management</a></li>
+            <li class="active"><a href="CustomerManagement"><i class="fa fa-circle-o"></i> Customer Management</a></li>
             <li><a href="register.jsp"><i class="fa fa-circle-o"></i>Admin Registration</a></li>
           </ul>
         </li>
